@@ -133,6 +133,7 @@ class LibraryScreen extends StatelessWidget {
             Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     // subject - название предмета
                     // iconPath - путь к иконке (обязательно assets/images/)
@@ -147,6 +148,7 @@ class LibraryScreen extends StatelessWidget {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SubjectWidget(
                       subject: 'Английский',
@@ -159,6 +161,7 @@ class LibraryScreen extends StatelessWidget {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SubjectWidget(
                       subject: 'Обществознание',
@@ -171,6 +174,7 @@ class LibraryScreen extends StatelessWidget {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SubjectWidget(
                       subject: 'ОБЖ',
