@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:school_manager/presentation/library_page.dart';
 import 'package:school_manager/presentation/main_page.dart';
 
 void main() => runApp(const MyApp());
@@ -47,17 +48,7 @@ class _NavBarState extends State<NavBar> {
       ),
       body: <Widget>[
         const BasicScreen(),
-        const Card(
-          shadowColor: Colors.transparent,
-          margin: EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Home page',
-              ),
-            ),
-          ),
-        ),
+        const LibraryScreen(),
 
         const Padding(
           padding: EdgeInsets.all(8.0),

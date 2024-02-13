@@ -1,0 +1,45 @@
+/* 
+
+  SubjectWidget - виджет для предметов
+  Принимает 2 аргумента: subject, iconPath
+  subject - название предмета в виде строки (желательно писать с заглавной буквы)
+  iconPath - путь к иконке изображения
+  // TODO: Сделать чтобы можно было прописывать только название иконки (сделать дефолтным путь до иконки assets/icons/)
+  // TODO: Добавить папку icons в assets
+  
+*/
+
+
+import 'package:flutter/material.dart';
+
+class SubjectWidget extends StatelessWidget {
+  final String subject;
+  final String iconPath;
+  const SubjectWidget(
+      {super.key, required this.subject, required this.iconPath});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150,
+      width: 150,
+      child: Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image(
+              image: AssetImage(iconPath),
+              height: 64,
+              width: 64,
+              fit: BoxFit.cover,
+            )),
+            const Padding(padding: EdgeInsets.only(bottom: 8)),
+            Text(subject, style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w400, fontSize: 14),),
+          ],
+        ),
+      ),
+    );
+  }
+}

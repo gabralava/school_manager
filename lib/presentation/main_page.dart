@@ -96,7 +96,7 @@ class BasicScreen extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: ListView(
           children: [
-            const Text('Главное меню', style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w800, fontSize: 16)),
+            const Text('Главные новости', style: TextStyle(fontFamily: 'Montserrat', fontWeight: FontWeight.w800, fontSize: 16)),
             const Padding(padding: EdgeInsets.only(bottom: 4)),  
             SizedBox(
               height: 300,
