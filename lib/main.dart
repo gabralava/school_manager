@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:school_manager/presentation/library_page.dart';
 import 'package:school_manager/presentation/main_page.dart';
+import 'package:school_manager/presentation/timetable_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -49,28 +50,7 @@ class _NavBarState extends State<NavBar> {
       body: <Widget>[
         const BasicScreen(),
         const LibraryScreen(),
-
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 1'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 2'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-            ],
-          ),
-        ),
+        const TimetableScreen()
 
       ][currentPageIndex],
     );
