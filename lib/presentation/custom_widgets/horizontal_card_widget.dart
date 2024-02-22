@@ -106,6 +106,17 @@ class RecentBookWidget extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         fontSize: 14),
                   ),
+                  Text('В.Г. Горецкий',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 10)),
+                  Spacer(),
+                  Text('Год издания: 2024',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w300,
+                          fontSize: 10)),
                 ],
               ),
             ),
