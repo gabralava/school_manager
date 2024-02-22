@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:school_manager/presentation/custom_widgets/horizontal_card_widget.dart';
 
 class SubjectListScreen extends StatelessWidget {
   final String subject;
@@ -99,14 +98,87 @@ class ExpansionList extends StatelessWidget {
               dividerColor: Colors.transparent,
             ),
             child: ExpansionTile(
-              title: Text('${index+1} класс'),
+              title: Text('${index + 1} класс'),
               children: const [
-                  HorizontalCardWidget(),
+                TextbookWidget(),
+                TextbookWidget(),
               ],
             ),
           ),
         );
       },
+    );
+  }
+}
+
+class TextbookWidget extends StatelessWidget {
+  const TextbookWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      child: Card(
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: const Image(
+                image: AssetImage('assets/images/Rus.jpg'),
+                width: 70,
+                height: 100,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(right: 12)),
+            const Padding(
+              padding: EdgeInsets.only(top: 12, bottom: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Русский язык',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14),
+                  ),
+                  Text('В.Г. Горецкий, В.А. Кирюшкин',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 10)),
+                  Spacer(),
+                  Text(
+                    'Год издания: 2024',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 10),
+                  )
+                ],
+              ),
+            ),
+            // Располагаю иконку в правом нижнем углу. Виджет Spacer() заполняет все доступное пространство между иконкой и текстом
+            const Spacer(),
+            const Align(
+              alignment: Alignment.bottomRight,
+              child: IconButton(
+                onPressed: null,
+                iconSize: 24,
+                icon: Icon(
+                  Icons.arrow_right,
+                  color: Colors.white,
+                ),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll(Color.fromRGBO(31, 95, 91, 1)),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
