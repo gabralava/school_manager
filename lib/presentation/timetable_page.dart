@@ -117,7 +117,7 @@ class TimetableScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           children: [
             SizedBox(
@@ -179,10 +179,10 @@ class TimetableScreen extends StatelessWidget {
               height: 120,
               child: Card(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 12, bottom: 12),
+                  padding: const EdgeInsets.only(top: 12, bottom: 12),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 100,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -206,8 +206,8 @@ class TimetableScreen extends StatelessWidget {
                         width: 1,
                         color: Colors.grey,
                       ),
-                      Padding(padding: EdgeInsets.only(right: 16)),
-                      Column(
+                      const Padding(padding: EdgeInsets.only(right: 16)),
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(

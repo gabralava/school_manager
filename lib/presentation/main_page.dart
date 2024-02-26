@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:school_manager/presentation/custom_widgets/horizontal_card_widget.dart';
 import 'package:school_manager/presentation/custom_widgets/vertical_card_widget.dart';
+import 'package:school_manager/presentation/personal_account_page.dart';
 
 class BasicScreen extends StatelessWidget {
   const BasicScreen({super.key});
@@ -27,11 +28,11 @@ class BasicScreen extends StatelessWidget {
         ],
         backgroundColor: const Color.fromRGBO(6, 26, 35, 1),
       ),
-      drawer: const Drawer(
+      drawer: Drawer(
         backgroundColor: Colors.white,
         child: Column(
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
                 child: Column(
                 children: <Widget>[
                 Icon(
@@ -60,26 +61,34 @@ class BasicScreen extends StatelessWidget {
             )
           ),
             Padding(
-              padding: EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 12),
+              padding: const EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 12),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Icon(Icons.account_circle),
-                      Padding(padding: EdgeInsets.only(right: 12)),
-                      Text('Личный кабинет', style: TextStyle(fontFamily: 'Montserrat', fontSize: 14, fontWeight: FontWeight.w800),)
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => const PersonalAccountScreen())
+                      );
+                    },
+                    child: const Row(
+                      children: [
+                        Icon(Icons.account_circle),
+                        Padding(padding: EdgeInsets.only(right: 12)),
+                        Text('Личный кабинет', style: TextStyle(fontFamily: 'Montserrat', fontSize: 14, fontWeight: FontWeight.w800),)
+                      ],
+                    ),
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 12)),
-                  Row(
+                  const Padding(padding: EdgeInsets.only(bottom: 12)),
+                  const Row(
                     children: [
                       Icon(Icons.group),
                       Padding(padding: EdgeInsets.only(right: 12)),
                       Text('Группа', style: TextStyle(fontFamily: 'Montserrat', fontSize: 14, fontWeight: FontWeight.w800),)
                     ],
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 12)),
-                  Row(
+                  const Padding(padding: EdgeInsets.only(bottom: 12)),
+                  const Row(
                     children: [
                       Icon(Icons.work),
                       Padding(padding: EdgeInsets.only(right: 12)),
