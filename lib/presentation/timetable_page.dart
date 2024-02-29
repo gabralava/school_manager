@@ -80,8 +80,8 @@ class _TimetableScreenState extends State<TimetableScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: 12, left: 24, right: 24, bottom: 12),
+              padding:
+                  EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 12),
               child: Column(
                 children: [
                   Row(
@@ -246,20 +246,21 @@ class ScheduleWidget extends StatelessWidget {
 class DayWidget extends StatelessWidget {
   final int daysToAdd;
   final Map<String, String> weekDays = const {
-    'Mon' : 'Пн',
-    'Tue' : 'Вт',
-    'Wed' : 'Ср',
-    'Thu' : 'Чт',
-    'Fri' : 'Пт',
-    'Sat' : 'Сб',
-    'Sun' : 'Вс', 
+    'Mon': 'Пн',
+    'Tue': 'Вт',
+    'Wed': 'Ср',
+    'Thu': 'Чт',
+    'Fri': 'Пт',
+    'Sat': 'Сб',
+    'Sun': 'Вс',
   };
 
   const DayWidget({Key? key, this.daysToAdd = 0}) : super(key: key);
 
   // Переделывает английский формат даты на русский
-  String convertDateToRussian(daysToAdd, weekDays){
-    String todaysDate = DateFormat('EEE').format(DateTime.now().add(Duration(days: daysToAdd)));
+  String convertDateToRussian(daysToAdd, weekDays) {
+    String todaysDate =
+        DateFormat('EEE').format(DateTime.now().add(Duration(days: daysToAdd)));
     return weekDays[todaysDate];
   }
 
@@ -272,9 +273,11 @@ class DayWidget extends StatelessWidget {
     DateTime targetDate = now.add(Duration(days: daysToAdd));
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          convertDateToRussian(daysToAdd, weekDays), // 'EEE' формаconst т для вывода дня недели (например, 'Пн')
+          convertDateToRussian(daysToAdd,
+              weekDays), // 'EEE' формаconst т для вывода дня недели (например, 'Пн')
           style: const TextStyle(
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.w400,
@@ -309,27 +312,46 @@ class _WeeklyWidgetState extends State<WeeklyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ToggleButtons(
-      borderColor: Colors.transparent,
-      constraints: const BoxConstraints.expand(height: 54, width: 54),
-      isSelected: isSelected,
-      onPressed: (index) {
-        setState(() {
-          for (int i = 0; i < isSelected.length; i++) {
-            isSelected[i] = i == index;
-          }
-          widget.onIndexChanged(index);
-        });
-      },
+    final buttonWidth = MediaQuery.of(context).size.width / 7;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // TODO: Переделать onPressed отображение
+        ToggleButtons(
+          constraints: BoxConstraints.expand(height: 60, width: buttonWidth),
+          renderBorder: false,
+          isSelected: isSelected,
+          onPressed: (index) {
+            setState(() {
+              for (int i = 0; i < isSelected.length; i++) {
+                isSelected[i] = i == index;
+              }
+              widget.onIndexChanged(index);
+            });
+          },
 
-      // TODO: Сделать builder дат
-      children: const [
-        DayWidget(daysToAdd: 0,),
-        DayWidget(daysToAdd: 1,),
-        DayWidget(daysToAdd: 2,),
-        DayWidget(daysToAdd: 3,),
-        DayWidget(daysToAdd: 4,),
-        DayWidget(daysToAdd: 5,),
+          // TODO: Сделать builder дат
+          children: const [
+            DayWidget(
+              daysToAdd: 0,
+            ),
+            DayWidget(
+              daysToAdd: 1,
+            ),
+            DayWidget(
+              daysToAdd: 2,
+            ),
+            DayWidget(
+              daysToAdd: 3,
+            ),
+            DayWidget(
+              daysToAdd: 4,
+            ),
+            DayWidget(
+              daysToAdd: 5,
+            ),
+          ],
+        ),
       ],
     );
   }
