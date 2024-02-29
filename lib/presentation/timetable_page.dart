@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class TimetableScreen extends StatelessWidget {
-  const TimetableScreen({super.key});
+class TimetableScreen extends StatefulWidget {
+  const TimetableScreen({Key? key}) : super(key: key);
+
+  @override
+  _TimetableScreenState createState() => _TimetableScreenState();
+}
+
+class _TimetableScreenState extends State<TimetableScreen> {
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +29,13 @@ class TimetableScreen extends StatelessWidget {
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 12),
-            child: Row(children: [
-              Icon(Icons.calendar_month),
-              Padding(padding: EdgeInsets.only(right: 12)),
-              Icon(Icons.more_vert),
-            ]),
+            child: Row(
+              children: [
+                Icon(Icons.calendar_month),
+                Padding(padding: EdgeInsets.only(right: 12)),
+                Icon(Icons.more_vert),
+              ],
+            ),
           ),
         ],
         backgroundColor: const Color.fromRGBO(6, 26, 35, 1),
@@ -35,38 +45,43 @@ class TimetableScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             DrawerHeader(
-                child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.account_circle,
-                  size: 48,
-                ),
-                Text(
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.account_circle,
+                    size: 48,
+                  ),
+                  Text(
+                    'Абралава Георгий',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w800,
                       fontSize: 20,
                     ),
-                    'Абралава Георгий'),
-                Text('Ученик 11а класса',
+                  ),
+                  Text(
+                    'Ученик 11а класса',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
-                    )),
-                Padding(padding: EdgeInsets.only(top: 19)),
-                Text(
-                  'Средняя успеваемость: 4.5',
-                  style: TextStyle(
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.only(top: 19)),
+                  Text(
+                    'Средняя успеваемость: 4.5',
+                    style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w400,
-                      fontSize: 12),
-                ),
-              ],
-            )),
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
-              padding:
-                  EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 12),
+              padding: EdgeInsets.only(
+                  top: 12, left: 24, right: 24, bottom: 12),
               child: Column(
                 children: [
                   Row(
@@ -76,10 +91,11 @@ class TimetableScreen extends StatelessWidget {
                       Text(
                         'Личный кабинет',
                         style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800),
-                      )
+                          fontFamily: 'Montserrat',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
                     ],
                   ),
                   Padding(padding: EdgeInsets.only(bottom: 12)),
@@ -90,10 +106,11 @@ class TimetableScreen extends StatelessWidget {
                       Text(
                         'Группа',
                         style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800),
-                      )
+                          fontFamily: 'Montserrat',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
                     ],
                   ),
                   Padding(padding: EdgeInsets.only(bottom: 12)),
@@ -104,15 +121,16 @@ class TimetableScreen extends StatelessWidget {
                       Text(
                         'Сотрудники',
                         style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800),
-                      )
+                          fontFamily: 'Montserrat',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -121,131 +139,19 @@ class TimetableScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 50,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: const [
-                  // TODO: Сделать автоматическое создание строк
-                  // TODO: Добавить возможность нажатия на дату с последующим выводом расписания
-                  Row(
-                    children: [
-                      DayWidget(),
-                      DayWidget(),
-                      DayWidget(),
-                      DayWidget(),
-                      DayWidget(),
-                      DayWidget(),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        height: 80,
-                        width: 60,
-                        child: Column(children: [Text('Пн'), Text('26')]),
-                      ),
-                      SizedBox(
-                        height: 80,
-                        width: 60,
-                        child: Column(children: [Text('Вт'), Text('27')]),
-                      ),
-                      SizedBox(
-                        height: 80,
-                        width: 60,
-                        child: Column(children: [Text('Ср'), Text('28')]),
-                      ),
-                      SizedBox(
-                        height: 80,
-                        width: 60,
-                        child: Column(children: [Text('Чт'), Text('29')]),
-                      ),
-                      SizedBox(
-                        height: 80,
-                        width: 60,
-                        child: Column(children: [Text('Пт'), Text('1')]),
-                      ),
-                      SizedBox(
-                        height: 80,
-                        width: 60,
-                        child: Column(children: [Text('Сб'), Text('2')]),
-                      ),
-                    ],
-                  )
-                ],
+              height: 60,
+              child: WeeklyWidget(
+                onIndexChanged: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
               ),
             ),
-            // TODO: Сделать отдельным виджетом
-            SizedBox(
-              height: 120,
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 12, bottom: 12),
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 100,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.book,
-                              size: 48,
-                            ),
-                            Text(
-                              '8:30 - 9:15',
-                              style: TextStyle(
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 96,
-                        width: 1,
-                        color: Colors.grey,
-                      ),
-                      const Padding(padding: EdgeInsets.only(right: 16)),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'A-315',
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 12),
-                          ),
-                          Text(
-                            'Литература',
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w800,
-                                fontSize: 16),
-                          ),
-                          Text(
-                            'Марина Геннадьевна',
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12),
-                          ),
-                          Spacer(),
-                          Text(
-                            'ДЗ: Прочитать Войну и мир',
-                            style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            )
+            Visibility(
+              visible: selectedIndex == 0,
+              child: const ScheduleWidget(),
+            ),
           ],
         ),
       ),
@@ -253,30 +159,178 @@ class TimetableScreen extends StatelessWidget {
   }
 }
 
-class DayWidget extends StatelessWidget {
-  const DayWidget({super.key});
+class ScheduleWidget extends StatelessWidget {
+  const ScheduleWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 80,
-      width: 60,
-      child: Column(children: [
+    return SizedBox(
+      height: 120,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 12, bottom: 12),
+          child: Row(
+            children: [
+              const SizedBox(
+                width: 100,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.book,
+                      size: 48,
+                    ),
+                    Text(
+                      '8:30 - 9:15',
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 96,
+                width: 1,
+                color: Colors.grey,
+              ),
+              const Padding(padding: EdgeInsets.only(right: 16)),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'A-315',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    'Литература',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Text(
+                    'Марина Геннадьевна',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    'ДЗ: Прочитать Войну и мир',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DayWidget extends StatelessWidget {
+  final int daysToAdd;
+  final Map<String, String> weekDays = const {
+    'Mon' : 'Пн',
+    'Tue' : 'Вт',
+    'Wed' : 'Ср',
+    'Thu' : 'Чт',
+    'Fri' : 'Пт',
+    'Sat' : 'Сб',
+    'Sun' : 'Вс', 
+  };
+
+  const DayWidget({Key? key, this.daysToAdd = 0}) : super(key: key);
+
+  // Переделывает английский формат даты на русский
+  String convertDateToRussian(daysToAdd, weekDays){
+    String todaysDate = DateFormat('EEE').format(DateTime.now().add(Duration(days: daysToAdd)));
+    return weekDays[todaysDate];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Получаем текущую дату
+    DateTime now = DateTime.now();
+
+    // Добавляем нужное количество дней
+    DateTime targetDate = now.add(Duration(days: daysToAdd));
+
+    return Column(
+      children: [
         Text(
-          'Пн',
-          style: TextStyle(
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.w400,
-              fontSize: 12),
+          convertDateToRussian(daysToAdd, weekDays), // 'EEE' формаconst т для вывода дня недели (например, 'Пн')
+          style: const TextStyle(
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.w400,
+            fontSize: 12,
+          ),
         ),
         Text(
-          '19',
-          style: TextStyle(
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.w700,
-              fontSize: 16),
-        )
-      ]),
+          DateFormat('dd').format(targetDate), // Выводим день месяца
+          style: const TextStyle(
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class WeeklyWidget extends StatefulWidget {
+  final ValueChanged<int> onIndexChanged;
+
+  const WeeklyWidget({Key? key, required this.onIndexChanged})
+      : super(key: key);
+
+  @override
+  State<WeeklyWidget> createState() => _WeeklyWidgetState();
+}
+
+class _WeeklyWidgetState extends State<WeeklyWidget> {
+  List<bool> isSelected = [false, false, false, false, false, false];
+
+  @override
+  Widget build(BuildContext context) {
+    return ToggleButtons(
+      borderColor: Colors.transparent,
+      constraints: const BoxConstraints.expand(height: 54, width: 54),
+      isSelected: isSelected,
+      onPressed: (index) {
+        setState(() {
+          for (int i = 0; i < isSelected.length; i++) {
+            isSelected[i] = i == index;
+          }
+          widget.onIndexChanged(index);
+        });
+      },
+
+      // TODO: Сделать builder дат
+      children: const [
+        DayWidget(daysToAdd: 0,),
+        DayWidget(daysToAdd: 1,),
+        DayWidget(daysToAdd: 2,),
+        DayWidget(daysToAdd: 3,),
+        DayWidget(daysToAdd: 4,),
+        DayWidget(daysToAdd: 5,),
+      ],
     );
   }
 }
