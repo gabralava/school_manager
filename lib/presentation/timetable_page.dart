@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:school_manager/presentation/UI/appbar.dart';
 
 class TimetableScreen extends StatefulWidget {
   const TimetableScreen({Key? key}) : super(key: key);
@@ -14,32 +15,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Расписание',
-          style: TextStyle(
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w800,
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
-        iconTheme: const IconThemeData(color: Colors.white),
-        centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 12),
-            child: Row(
-              children: [
-                Icon(Icons.calendar_month),
-                Padding(padding: EdgeInsets.only(right: 12)),
-                Icon(Icons.more_vert),
-              ],
-            ),
-          ),
-        ],
-        backgroundColor: const Color.fromRGBO(6, 26, 35, 1),
-      ),
+      appBar: TimetableAppBar(pageName: 'Расписание'),
       drawer: const Drawer(
         backgroundColor: Colors.white,
         child: Column(
@@ -244,6 +220,7 @@ class ScheduleWidget extends StatelessWidget {
 }
 
 class DayWidget extends StatelessWidget {
+  final bool isSelected;
   final int daysToAdd;
   final Map<String, String> weekDays = const {
     'Mon': 'Пн',
@@ -255,7 +232,7 @@ class DayWidget extends StatelessWidget {
     'Sun': 'Вс',
   };
 
-  const DayWidget({Key? key, this.daysToAdd = 0}) : super(key: key);
+  const DayWidget({Key? key, this.daysToAdd = 0, required this.isSelected}) : super(key: key);
 
   // Переделывает английский формат даты на русский
   String convertDateToRussian(daysToAdd, weekDays) {
@@ -286,9 +263,9 @@ class DayWidget extends StatelessWidget {
         ),
         Text(
           DateFormat('dd').format(targetDate), // Выводим день месяца
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w700,
+            fontWeight: isSelected ? FontWeight.w800 : FontWeight.w400,
             fontSize: 16,
           ),
         ),
@@ -312,12 +289,14 @@ class _WeeklyWidgetState extends State<WeeklyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final buttonWidth = MediaQuery.of(context).size.width / 7;
+    final buttonWidth = MediaQuery.of(context).size.width / 7 + 4;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // TODO: Переделать onPressed отображение
         ToggleButtons(
+          selectedColor: Color.fromRGBO(31, 95, 91, 1),
+          fillColor: Colors.transparent,
           constraints: BoxConstraints.expand(height: 60, width: buttonWidth),
           renderBorder: false,
           isSelected: isSelected,
@@ -330,24 +309,31 @@ class _WeeklyWidgetState extends State<WeeklyWidget> {
             });
           },
 
-          // TODO: Сделать builder дат
-          children: const [
+          // TODO: Переделать код
+          // TODO: Доделать изменение шрифта
+          children: [
             DayWidget(
+              isSelected: isSelected[0],
               daysToAdd: 0,
             ),
             DayWidget(
+              isSelected: isSelected[1],
               daysToAdd: 1,
             ),
             DayWidget(
+              isSelected: isSelected[2],
               daysToAdd: 2,
             ),
             DayWidget(
+              isSelected: isSelected[3],
               daysToAdd: 3,
             ),
             DayWidget(
+              isSelected: isSelected[4],
               daysToAdd: 4,
             ),
             DayWidget(
+              isSelected: isSelected[5],
               daysToAdd: 5,
             ),
           ],
