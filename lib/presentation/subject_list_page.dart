@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:school_manager/presentation/UI/appbar.dart';
 
 class SubjectListScreen extends StatelessWidget {
   final String subject;
@@ -8,30 +9,7 @@ class SubjectListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            subject,
-            style: const TextStyle(
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.w800,
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-          iconTheme: const IconThemeData(color: Colors.white),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-          actions: const [
-            Padding(
-                padding: EdgeInsets.only(right: 24),
-                child: Icon(Icons.more_vert)),
-          ],
-          backgroundColor: const Color.fromRGBO(6, 26, 35, 1),
-        ),
+        appBar: CustomAppBar(pageName: subject),
         body: const Padding(
           padding: EdgeInsets.only(
             top: 12,

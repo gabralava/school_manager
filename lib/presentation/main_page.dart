@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:school_manager/presentation/custom_widgets/horizontal_card_widget.dart';
-import 'package:school_manager/presentation/custom_widgets/vertical_card_widget.dart';
+import 'package:school_manager/presentation/UI/appbar.dart';
+import 'package:school_manager/presentation/UI/card_widget.dart';
 import 'package:school_manager/presentation/personal_account_page.dart';
 
 class BasicScreen extends StatelessWidget {
@@ -9,25 +9,7 @@ class BasicScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter App', 
-          style: TextStyle(
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w800,
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
-        iconTheme: const IconThemeData(color: Colors.white),
-        centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 24),
-            child: Icon(Icons.notifications)
-          ),
-        ],
-        backgroundColor: const Color.fromRGBO(6, 26, 35, 1),
-      ),
+      appBar: CustomAppBar(pageName: 'Flutter app'),
       drawer: Drawer(
         backgroundColor: Colors.white,
         child: Column(
