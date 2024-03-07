@@ -9,7 +9,8 @@ class PersonalAccountScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           const SliverAppBar(
-            backgroundColor: Color.fromRGBO(31, 95, 91, 1),
+            iconTheme: IconThemeData(color: Colors.white),
+            backgroundColor: Color.fromRGBO(6, 26, 35, 1),
             floating: true,
             expandedHeight: 200.0,
             flexibleSpace: FlexibleSpaceBar(
@@ -55,7 +56,7 @@ class PersonalAccountScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              color: const Color.fromRGBO(31, 95, 91, 1),
+              color: const Color.fromRGBO(6, 26, 35, 1),
               height: 20,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -83,7 +84,7 @@ class PersonalAccountScreen extends StatelessWidget {
                       'Личный кабинет',
                       style: TextStyle(
                           fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w800,
                           fontSize: 20),
                     )),
                 Theme(
@@ -92,7 +93,13 @@ class PersonalAccountScreen extends StatelessWidget {
                   ),
                   child: const ExpansionTile(
                     tilePadding: EdgeInsets.only(left: 24, right: 24),
-                    title: Text('Успеваемость'),
+                    title: Text(
+                      'Успеваемость',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16),
+                    ),
                     children: [
                       PerformanceWidget(
                         subject: 'Русский язык',
@@ -113,14 +120,19 @@ class PersonalAccountScreen extends StatelessWidget {
                   data: ThemeData(dividerColor: Colors.transparent),
                   child: const ExpansionTile(
                     tilePadding: EdgeInsets.only(left: 24, right: 24),
-                    title: Text('Уведомления'),
+                    title: Text(
+                      'Уведомления',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16),
+                    ),
                     children: [
                       Column(
                         children: [
-                          Text('Выберите какие уведомления присылать вам:'),
                           Padding(
                             padding:
-                                EdgeInsets.only(left: 48, top: 12, right: 12),
+                                EdgeInsets.only(left: 24, top: 4, right: 12),
                             child: Row(
                               children: [
                                 Column(
@@ -143,18 +155,13 @@ class PersonalAccountScreen extends StatelessWidget {
                                   ],
                                 ),
                                 Spacer(),
-                                IconButton(
-                                    onPressed: null,
-                                    icon: Icon(
-                                      Icons.toggle_off,
-                                      size: 36,
-                                    )),
+                                ToggleButton(),
                               ],
                             ),
                           ),
                           Padding(
                             padding:
-                                EdgeInsets.only(left: 48, top: 12, right: 12),
+                                EdgeInsets.only(left: 24, top: 12, right: 12),
                             child: Row(
                               children: [
                                 Column(
@@ -177,12 +184,7 @@ class PersonalAccountScreen extends StatelessWidget {
                                   ],
                                 ),
                                 Spacer(),
-                                IconButton(
-                                    onPressed: null,
-                                    icon: Icon(
-                                      Icons.toggle_off,
-                                      size: 36,
-                                    )),
+                                ToggleButton(),
                               ],
                             ),
                           ),
@@ -195,10 +197,17 @@ class PersonalAccountScreen extends StatelessWidget {
                     data: ThemeData(dividerColor: Colors.transparent),
                     child: ExpansionTile(
                       tilePadding: const EdgeInsets.only(left: 24, right: 24),
-                      title: const Text('Аккаунт'),
+                      title: const Text(
+                        'Аккаунт',
+                        style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16),
+                      ),
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 24, right: 24),
+                          padding: const EdgeInsets.only(
+                              left: 24, right: 24, bottom: 24),
                           child: Column(
                             children: [
                               const Row(
@@ -221,7 +230,14 @@ class PersonalAccountScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Padding(padding: const EdgeInsets.only(top: 8, bottom: 8),child: Container(height: 1, color: const Color.fromRGBO(217, 215, 215, 1),)),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 8),
+                                  child: Container(
+                                    height: 1,
+                                    color:
+                                        const Color.fromRGBO(217, 215, 215, 1),
+                                  )),
                               const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -241,9 +257,15 @@ class PersonalAccountScreen extends StatelessWidget {
                                         fontSize: 12),
                                   ),
                                 ],
-                                
                               ),
-                              Padding(padding: const EdgeInsets.only(top: 8, bottom: 8),child: Container(height: 1, color: const Color.fromRGBO(217, 215, 215, 1),)),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 8, bottom: 8),
+                                  child: Container(
+                                    height: 1,
+                                    color:
+                                        const Color.fromRGBO(217, 215, 215, 1),
+                                  )),
                               const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -332,6 +354,30 @@ class PerformanceWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+
+class ToggleButton extends StatefulWidget {
+  const ToggleButton({super.key});
+
+  @override
+  State<ToggleButton> createState() => _ToggleButtonState();
+}
+
+class _ToggleButtonState extends State<ToggleButton> {
+  bool isToggleOn = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          isToggleOn = !isToggleOn;
+        });
+      },
+      icon: isToggleOn ? const Icon(Icons.toggle_on, size: 36,) : const Icon(Icons.toggle_off, size: 36,),
     );
   }
 }
