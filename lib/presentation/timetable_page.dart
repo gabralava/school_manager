@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:school_manager/presentation/UI/appbar.dart';
+import 'package:school_manager/presentation/ui_kit/appbar.dart';
+import 'package:school_manager/presentation/ui_kit/drawer.dart';
 
 class TimetableScreen extends StatefulWidget {
   const TimetableScreen({Key? key}) : super(key: key);
@@ -15,101 +16,8 @@ class _TimetableScreenState extends State<TimetableScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TimetableAppBar(pageName: 'Расписание'),
-      drawer: const Drawer(
-        backgroundColor: Colors.white,
-        child: Column(
-          children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                children: <Widget>[
-                  Icon(
-                    Icons.account_circle,
-                    size: 48,
-                  ),
-                  Text(
-                    'Абралава Георгий',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w800,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    'Ученик 11а класса',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14,
-                    ),
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 19)),
-                  Text(
-                    'Средняя успеваемость: 4.5',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:
-                  EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 12),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.account_circle),
-                      Padding(padding: EdgeInsets.only(right: 12)),
-                      Text(
-                        'Личный кабинет',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(padding: EdgeInsets.only(bottom: 12)),
-                  Row(
-                    children: [
-                      Icon(Icons.group),
-                      Padding(padding: EdgeInsets.only(right: 12)),
-                      Text(
-                        'Группа',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(padding: EdgeInsets.only(bottom: 12)),
-                  Row(
-                    children: [
-                      Icon(Icons.work),
-                      Padding(padding: EdgeInsets.only(right: 12)),
-                      Text(
-                        'Сотрудники',
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+      appBar: const TimetableAppBar(pageName: 'Расписание'),
+      drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
@@ -255,9 +163,9 @@ class DayWidget extends StatelessWidget {
         Text(
           convertDateToRussian(daysToAdd,
               weekDays), // 'EEE' формаconst т для вывода дня недели (например, 'Пн')
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w400,
+            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
             fontSize: 12,
           ),
         ),
@@ -269,6 +177,18 @@ class DayWidget extends StatelessWidget {
             fontSize: 16,
           ),
         ),
+        Visibility(
+          visible: isSelected,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: Container(
+              
+              height: 2,
+              width: 16,
+              color: const Color.fromRGBO(31, 95, 91, 1),
+            ),
+          ),
+        )
       ],
     );
   }
@@ -293,9 +213,8 @@ class _WeeklyWidgetState extends State<WeeklyWidget> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // TODO: Переделать onPressed отображение
         ToggleButtons(
-          selectedColor: Color.fromRGBO(31, 95, 91, 1),
+          selectedColor: const Color.fromRGBO(31, 95, 91, 1),
           fillColor: Colors.transparent,
           constraints: BoxConstraints.expand(height: 60, width: buttonWidth),
           renderBorder: false,
@@ -309,8 +228,6 @@ class _WeeklyWidgetState extends State<WeeklyWidget> {
             });
           },
 
-          // TODO: Переделать код
-          // TODO: Доделать изменение шрифта
           children: [
             DayWidget(
               isSelected: isSelected[0],
