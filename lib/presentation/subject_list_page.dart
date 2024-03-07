@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school_manager/presentation/UI/appbar.dart';
+import 'package:school_manager/presentation/ui_kit/appbar.dart';
 
 class SubjectListScreen extends StatelessWidget {
   final String subject;
@@ -89,6 +89,8 @@ class ExpansionList extends StatelessWidget {
   }
 }
 
+
+// TODO: Поменять цвет виджета
 class TextbookWidget extends StatelessWidget {
   const TextbookWidget({super.key});
 
