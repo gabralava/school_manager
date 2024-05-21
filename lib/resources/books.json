@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "subject": "Русский язык",
+        "class": 5,
+        "author": "В. Г. Горецкий",
+        "date": 2024,
+        "img_path": "assets/images/Rus.jpg"
+    },
+    {
+        "id": 2,
+        "subject": "Русский язык",
+        "class": 4,
+        "author": "В. Г. Горецкий",
+        "date": 2024,
+        "img_path": "assets/images/Rus.jpg"
+    },
+    {
+        "id": 2,
+        "subject": "Русский язык",
+        "class": 4,
+        "author": "В. Г. Горецкий",
+        "date": 2024,
+        "img_path": "assets/images/Rus.jpg"
+    },
+    {
+        "id" : 3,
+        "subject": "Английский",
+        "class": 2,
+        "author": "Лох какой-то",
+        "date": 2024,
+        "img_path": "assets/images/Rus.jpg"
+    }
+]
