@@ -5,6 +5,20 @@ import 'package:school_manager/presentation/ui_kit/drawer.dart';
 import 'package:school_manager/presentation/ui_kit/subject_widget.dart';
 
 class LibraryScreen extends StatelessWidget {
+  final List<SubjectWidget> listOfSubjects = const [
+    SubjectWidget(
+        subject: 'Русский язык', iconPath: 'BMD-3398.png'),
+    SubjectWidget(
+        subject: 'Литература', iconPath: 'BMD-3398.png'),
+    SubjectWidget(
+        subject: 'Английский', iconPath: 'BMD-3398.png'),
+    SubjectWidget(
+        subject: 'Обществознание', iconPath: 'BMD-3398.png'),
+    SubjectWidget(subject: 'География', iconPath: 'BMD-3398.png'),
+    SubjectWidget(subject: 'Физика', iconPath: 'BMD-3398.png'),
+    SubjectWidget(subject: 'ОБЖ', iconPath: 'BMD-3398.png')
+  ];
+
   const LibraryScreen({super.key});
 
   @override
@@ -15,78 +29,27 @@ class LibraryScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: ListView(
-          children: const [
-            Text('Недавние учебники',
+          children: [
+            const Text('Недавние учебники',
                 style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w800,
                     fontSize: 16)),
-            Padding(padding: EdgeInsets.only(bottom: 8)),
-            RecentBookWidget(),
-            Padding(padding: EdgeInsets.only(bottom: 24)),
-            Text('Предметы',
+            const Padding(padding: EdgeInsets.only(bottom: 8)),
+            const RecentBookWidget(),
+            const Padding(padding: EdgeInsets.only(bottom: 24)),
+            const Text('Предметы',
                 style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w800,
                     fontSize: 16)),
-            // TODO: Сделать это [GridTile]
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // subject - название предмета
-                    // iconPath - путь к иконке (обязательно assets/images/)
-                    SubjectWidget(
-                      subject: 'Русский язык',
-                      iconPath: 'assets/images/BMD-3398.png',
-                    ),
-                    SubjectWidget(
-                      subject: 'Литература',
-                      iconPath: 'assets/images/BMD-3398.png',
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SubjectWidget(
-                      subject: 'Английский',
-                      iconPath: 'assets/images/BMD-3398.png',
-                    ),
-                    SubjectWidget(
-                      subject: 'История',
-                      iconPath: 'assets/images/BMD-3398.png',
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SubjectWidget(
-                      subject: 'Обществознание',
-                      iconPath: 'assets/images/BMD-3398.png',
-                    ),
-                    SubjectWidget(
-                      subject: 'География',
-                      iconPath: 'assets/images/BMD-3398.png',
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SubjectWidget(
-                      subject: 'ОБЖ',
-                      iconPath: 'assets/images/BMD-3398.png',
-                    ),
-                    SubjectWidget(
-                      subject: 'Физика',
-                      iconPath: 'assets/images/BMD-3398.png',
-                    ),
-                  ],
-                ),
-              ],
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2),
+              itemBuilder: (context, index) => listOfSubjects[index],
+              itemCount: listOfSubjects.length,
             )
           ],
         ),
