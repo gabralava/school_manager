@@ -83,7 +83,7 @@ class SubjectListScreen extends StatelessWidget {
 class ExpansionList extends StatelessWidget {
   final String subject;
 
-  ExpansionList({super.key, required this.subject});
+  const ExpansionList({super.key, required this.subject});
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +91,13 @@ class ExpansionList extends StatelessWidget {
       future: filterBooks(subject),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
           final filteredBooks = snapshot.data!;
           if (filteredBooks.isEmpty) {
-            return Center(child: Text('Книги не найдены'));
+            return const Center(child: Text('Книги не найдены'));
           } else {
             // Группировка книг по классам
             final Map<int, List<Books>> booksByClass = {};
