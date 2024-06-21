@@ -4,8 +4,6 @@
   Принимает 2 аргумента: subject, iconPath
   subject - название предмета в виде строки (желательно писать с заглавной буквы)
   iconPath - путь к иконке изображения
-  // TODO: Сделать чтобы можно было прописывать только название иконки (сделать дефолтным путь до иконки assets/icons/)
-  // TODO: Добавить папку icons в assets
   
 */
 
@@ -38,7 +36,7 @@ class SubjectWidget extends StatelessWidget {
               ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image(
-                    image: AssetImage(iconPath),
+                    image: AssetImage('assets/icons/$iconPath'),
                     height: 64,
                     width: 64,
                     fit: BoxFit.cover,
